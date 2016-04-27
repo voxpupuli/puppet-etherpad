@@ -1,3 +1,7 @@
+# puppet-etherpad
+[![Puppet Forge](http://img.shields.io/puppetforge/v/puppet/etherpad.svg)](https://forge.puppetlabs.com/puppet/etherpad)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-etherpad.svg?branch=master)](https://travis-ci.org/voxpupuli/puppet-etherpad)
+
 #### Table of Contents
 
 1. [Overview](#overview)
