@@ -74,12 +74,12 @@ describe 'etherpad' do
               'users' => {
                 'admin' => {
                   'password' => 's3cr3t',
-                  'is_admin' => true,
+                  'is_admin' => true
                 },
                 'user' => {
                   'password' => 'secret',
-                  'is_admin' => false,
-                },
+                  'is_admin' => false
+                }
               },
 
               # Logging
@@ -87,7 +87,7 @@ describe 'etherpad' do
               logconfig_file_filename: '/var/log/etherpad.log',
               logconfig_file_max_log_size: 1024,
               logconfig_file_backups: 3,
-              logconfig_file_category: 'etherpad',
+              logconfig_file_category: 'etherpad'
 
             }
           end
