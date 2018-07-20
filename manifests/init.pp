@@ -63,10 +63,8 @@ class etherpad (
   Optional[String] $logconfig_file_category      = undef,
 
   # Padoptions
-  Etherpad::Stpadoptions $padoptions = {},
-
+  Etherpad::Padoptions $padoptions = {},
 ) {
-  #Default parameters for padoptions
   $default_padoptions = {
     noColors         => false,
     showControls     => true,
@@ -81,7 +79,7 @@ class etherpad (
     lang             => 'en-gb',
   }
   #Merged values provides by user and default values
-    $_real_padoptions = merge($etherpad::default_padoptions, $etherpad::padoptions)
+  $_real_padoptions = merge($default_padoptions, $padoptions)
 
   if $manage_user {
     contain '::etherpad::user'
