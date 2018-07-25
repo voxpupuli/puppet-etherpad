@@ -396,7 +396,7 @@ Configure users in settings.json. If both 'users' and 'ldapauth' are set only th
 
 #### padoptions
 
-Configure pad options in settings.json.
+Configure pad behavior in settings.json.
 
 |Type |Default |
 |-----|--------|
