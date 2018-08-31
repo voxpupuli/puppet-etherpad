@@ -336,6 +336,10 @@ List of all plugins is avalable at https://static.etherpad.org/plugins.html
 |--------------|----------|
 |`ep_button_link`|YES|
 |`ep_ldapauth`|YES|
+<<<<<<< HEAD
+=======
+|`ep_mypads`|YES|
+>>>>>>> Add ep_mypads to supported plugins on module puppet-etherpad
 |All simple plugins|YES|
 
 If the plugin is not supported, it will be installed but whitout configuration.
@@ -383,6 +387,14 @@ Manage the configuration of `ep_ldapauth`.
 |Type |Default |
 |-----|--------|
 |Type |'https://www.npmjs.com/package/ep_ldapauth' |
+
+#### mypads
+
+Manage the configuration of `ep_mypads`.
+
+|Type |Default |
+|-----|--------|
+|Type |'https://www.npmjs.com/package/ep_mypads' or 'https://git.framasoft.org/framasoft/Etherpad/ep_mypads/wikis/use-ldap-authentication' |
 
 #### pad_title
 
