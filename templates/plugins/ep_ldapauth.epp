@@ -2,8 +2,6 @@
 "users": {
   "ldapauth": <%= to_json_pretty($etherpad::plugins::ep_ldapauth::_real_ldapauth_options) %>
 },
-<<<<<<< HEAD
-=======
 
 /*When LDAP is configured, you cannot add more than one Etherpad administrator. To see more, read the documentation.*/
 "users": {
@@ -13,4 +11,3 @@
   }
 },
 
->>>>>>> Add ep_mypads to supported plugins on module puppet-etherpad
