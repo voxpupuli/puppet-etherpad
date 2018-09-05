@@ -166,7 +166,7 @@ describe 'etherpad' do
       end
     end
   end
-  
+
   context 'supported operating systems' do
     on_supported_os.each do |os, facts|
       context "on #{os}" do
@@ -182,7 +182,7 @@ describe 'etherpad' do
               },
               mypads: {
                 'url' => 'ldap://ldap.my-example.com'
-              },
+              }
             }
           end
 
