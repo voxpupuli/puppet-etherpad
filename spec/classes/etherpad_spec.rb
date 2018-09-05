@@ -12,7 +12,6 @@ describe 'etherpad' do
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_vcsrepo('/opt/etherpad') }
           it { is_expected.to contain_file('/lib/systemd/system/etherpad.service') }
-          it { is_expected.to contain_concat_fragment('settings-second.json.epp').with_content(%r|^\s*"users": {$|) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').with_content(%r{check the documentation}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{ldapauth}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{ep_button_link}) }
@@ -48,7 +47,6 @@ describe 'etherpad' do
             }
           end
 
-          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"ldapauth": {$|) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"accountBase": "o=staff,o=foo,dc=bar,dc=com",$}) }
@@ -117,7 +115,7 @@ describe 'etherpad' do
                 'url'                => 'ldap://ldap.foobar.com',
                 'accountBase'        => 'o=staff,o=foo,dc=bar,dc=com',
                 'groupAttributeIsDN' => false
-              },
+              }
             }
           end
 
@@ -133,7 +131,6 @@ describe 'etherpad' do
           it { is_expected.to contain_file('ep_ldapauth') }
           it { is_expected.to contain_file('ldapauth-fork') }
           it { is_expected.to contain_file('ep_mypads') }
-
         end
       end
     end
@@ -150,9 +147,9 @@ describe 'etherpad' do
           let(:params) do
             {
               plugins_list: {
-                'ep_mypads' => true,
+                'ep_mypads' => true
               },
-              ep_local_admin_login: 'test-admin',
+              ep_local_admin_login: 'test-admin'
             }
           end
 
@@ -165,7 +162,6 @@ describe 'etherpad' do
           it { is_expected.to contain_file('ep_ldapauth') }
           it { is_expected.to contain_file('ldapauth-fork') }
           it { is_expected.to contain_file('ep_mypads') }
-
         end
       end
     end
@@ -182,10 +178,10 @@ describe 'etherpad' do
           let(:params) do
             {
               plugins_list: {
-                'ep_mypads' => true,
+                'ep_mypads' => true
               },
               mypads: {
-                'url' => 'ldap://ldap.my-example.com',
+                'url' => 'ldap://ldap.my-example.com'
               },
             }
           end
@@ -199,12 +195,10 @@ describe 'etherpad' do
           it { is_expected.to contain_file('ep_ldapauth') }
           it { is_expected.to contain_file('ldapauth-fork') }
           it { is_expected.to contain_file('ep_mypads') }
-
         end
       end
     end
   end
-
 
   context 'supported operating systems' do
     on_supported_os.each do |os, facts|
