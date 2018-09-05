@@ -63,7 +63,7 @@ note that this will use the local DirtyDB and is not recommended beyond basic te
 For production setups, use:
 
 ```puppet
-class { "etherpad":
+class { 'etherpad':
   ensure            => 'present',
   database_type     => 'mysql',
   database_name     => 'etherpad',
@@ -344,7 +344,7 @@ If the plugin is not supported, it will be installed but whitout configuration.
 Exemple :
 
 ```puppet
-class { "etherpad":
+class { 'etherpad':
   ensure            => 'present',
   database_type     => 'mysql',
   database_name     => 'etherpad',
