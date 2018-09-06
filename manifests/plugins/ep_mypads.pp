@@ -1,5 +1,5 @@
 class etherpad::plugins::ep_mypads {
-  etherpad::plugins::common { 'ep_mypads' :
+  assert_private() etherpad::plugins::common { 'ep_mypads' :
   }
   require Class[etherpad::plugins::ep_ldapauth]
   $default_mypads_options = {
