@@ -12,7 +12,7 @@ describe 'etherpad' do
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_vcsrepo('/opt/etherpad') }
           it { is_expected.to contain_file('/lib/systemd/system/etherpad.service') }
-          it { is_expected.to contain_concat_fragment('settings-second.json.epp').with_content(%r|^\s*"users": {$|) }
+          it { is_expected.to contain_concat_fragment('settings-second.json.epp').with_content(%r{check the documentation}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{ldapauth}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{ep_button_link}) }
           it { is_expected.to contain_concat_fragment('settings-first.json.epp').without_content(%r{\"ssl" :}) }
@@ -47,12 +47,13 @@ describe 'etherpad' do
             }
           end
 
-          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"ldapauth": {$|) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"accountBase": "o=staff,o=foo,dc=bar,dc=com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"groupAttributeIsDN": false,$}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"admin": {$|) }
           it { is_expected.to contain_file('ep_ldapauth') }
           it { is_expected.to contain_file('ep_button_link') }
           it { is_expected.not_to contain_file('/opt/etherpad/node_modules/ep_align') }
@@ -91,6 +92,109 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r/^\s*"ep_button_link": {$/) }
           it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"text\": \"Link Button\",$}) }
           it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"link\": \"https://example.com/pad-lister\",$}) }
+        end
+      end
+    end
+  end
+
+  context 'supported operating systems' do
+    on_supported_os.each do |os, facts|
+      context "on #{os}" do
+        let(:facts) do
+          facts
+        end
+
+        context 'etherpad class with ep_ldapauth and ep_mypads set' do
+          let(:params) do
+            {
+              plugins_list: {
+                'ep_ldapauth' => true,
+                'ep_mypads' => true
+              },
+              ldapauth: {
+                'url'                => 'ldap://ldap.foobar.com',
+                'accountBase'        => 'o=staff,o=foo,dc=bar,dc=com',
+                'groupAttributeIsDN' => false
+              }
+            }
+          end
+
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"ldapauth": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"accountBase": "o=staff,o=foo,dc=bar,dc=com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"groupAttributeIsDN": false,$}) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r|^\s*"ep_mypads": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"searchFilter": "o=staff,o=foo,dc=bar,dc=com",$}) }
+          it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
+          it { is_expected.to contain_file('ep_ldapauth') }
+          it { is_expected.to contain_file('ldapauth-fork') }
+          it { is_expected.to contain_file('ep_mypads') }
+        end
+      end
+    end
+  end
+
+  context 'supported operating systems' do
+    on_supported_os.each do |os, facts|
+      context "on #{os}" do
+        let(:facts) do
+          facts
+        end
+
+        context 'etherpad class with only ep_mypads set' do
+          let(:params) do
+            {
+              plugins_list: {
+                'ep_mypads' => true
+              },
+              ep_local_admin_login: 'test-admin'
+            }
+          end
+
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r|^\s*"ep_mypads": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldaps:\/\/ldap.example.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"searchBase\": \"ou=Groups,dc=example,dc=com\",$}) }
+          it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"test-admin": {$|) }
+          it { is_expected.to contain_file('ep_ldapauth') }
+          it { is_expected.to contain_file('ldapauth-fork') }
+          it { is_expected.to contain_file('ep_mypads') }
+        end
+      end
+    end
+  end
+
+  context 'supported operating systems' do
+    on_supported_os.each do |os, facts|
+      context "on #{os}" do
+        let(:facts) do
+          facts
+        end
+
+        context 'etherpad class with ep_mypads plugin and etherpad::mypads set' do
+          let(:params) do
+            {
+              plugins_list: {
+                'ep_mypads' => true
+              },
+              mypads: {
+                'url' => 'ldap://ldap.my-example.com'
+              }
+            }
+          end
+
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r|^\s*"ep_mypads": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldap:\/\/ldap.my-example.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"searchBase\": \"ou=Groups,dc=example,dc=com\",$}) }
+          it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"admin": {$|) }
+          it { is_expected.to contain_file('ep_ldapauth') }
+          it { is_expected.to contain_file('ldapauth-fork') }
+          it { is_expected.to contain_file('ep_mypads') }
         end
       end
     end

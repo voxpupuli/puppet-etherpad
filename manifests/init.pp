@@ -40,6 +40,7 @@ class etherpad (
   # Config
   Etherpad::Ldapauth $ldapauth      = {},
   Etherpad::Buttonlink $button_link = {},
+  Etherpad::Mypads $mypads          = {},
   Boolean $require_session          = false,
   Boolean $edit_only                = false,
   Boolean $require_authentication   = false,
@@ -48,7 +49,9 @@ class etherpad (
   String $default_pad_text          = 'Welcome to etherpad!',
 
   # Users
-  Optional[Hash] $users = undef,
+  Optional[Hash] $users           = undef,
+  String[1] $ep_local_admin_login = 'admin',
+  String[1] $ep_local_admin_pwd   = fqdn_rand_string(8),
 
   # Ssl
   Enum['enable','disable'] $ssl  = 'disable',
@@ -85,7 +88,6 @@ class etherpad (
   $_real_padoptions = merge($default_padoptions, $padoptions)
 
   #Install choosing plugins
-#
   $plugins_list.each |$_pname, $_penable| {
     case $_penable {
       true: { contain "etherpad::plugins::${_pname}"

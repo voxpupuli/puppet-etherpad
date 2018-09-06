@@ -15,6 +15,9 @@ class etherpad::plugins::ep_ldapauth {
     groupSearch          => '(&(cn=admin)(objectClass=groupOfNames))',
     anonymousReadonly    => false,
   }
+  if $etherpad::ldapauth == {} {
+    alert('You are using the default LDAP configuration. You cannot be able to connect on any LDAP with this configuration. Please add/configure the parameter `ldapauth` to use your own parameters and check the documentation.')
+  }
   $_real_ldapauth_options = merge($default_ldapauth_options, $etherpad::ldapauth)
   concat::fragment { 'ep_ldapauth':
     target  => "${etherpad::root_dir}/settings.json",

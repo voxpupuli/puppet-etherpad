@@ -1,7 +1,8 @@
-<%- if $etherpad::ldapauth =~ Hash[String, Variant[String,Boolean], 1] { -%>
-/* Users for basic authentication. is_admin = true gives access to /admin.
-   If you do not uncomment this, /admin will not be available! */
-<%- } elsif $etherpad::users { -%>
+<%- if $etherpad::plugins_list['ep_ldapauth'] == true { -%>
+<%- } elsif $etherpad::plugins_list['ep_mypads'] { -%>
+<%- } elsif $etherpad::ldapauth =~ Hash[String, Variant[String,Boolean], 1] { -%>
+<%- } elsif $etherpad::users { -%> 
+//Users
 "users": {
   <%- $etherpad::users.each |String $username, Hash $attrs| { -%>
   "<%= $username -%>": {
@@ -11,18 +12,8 @@
   <%- } -%>
 },
 <%- } else { -%>
-/*
-"users": {
-  "admin": {
-    "password": "changeme1",
-    "is_admin": true
-  },
-  "user": {
-    "password": "changeme1",
-    "is_admin": false
-  }
-},
-*/
+//Users
+/*If you want to add users, please configure `etherpad::users`. To see more, check the documentation*/
 <%- } -%>
 
 // restrict socket.io transport methods

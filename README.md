@@ -63,7 +63,7 @@ note that this will use the local DirtyDB and is not recommended beyond basic te
 For production setups, use:
 
 ```puppet
-class { "etherpad":
+class { 'etherpad':
   ensure            => 'present',
   database_type     => 'mysql',
   database_name     => 'etherpad',
@@ -336,6 +336,7 @@ List of all plugins is avalable at https://static.etherpad.org/plugins.html
 |--------------|----------|
 |`ep_button_link`|YES|
 |`ep_ldapauth`|YES|
+|`ep_mypads`|YES|
 |All simple plugins|YES|
 
 If the plugin is not supported, it will be installed but whitout configuration.
@@ -343,7 +344,7 @@ If the plugin is not supported, it will be installed but whitout configuration.
 Exemple :
 
 ```puppet
-class { "etherpad":
+class { 'etherpad':
   ensure            => 'present',
   database_type     => 'mysql',
   database_name     => 'etherpad',
@@ -383,6 +384,14 @@ Manage the configuration of `ep_ldapauth`.
 |Type |Default |
 |-----|--------|
 |Type |'https://www.npmjs.com/package/ep_ldapauth' |
+
+#### mypads
+
+Manage the configuration of `ep_mypads`.
+
+|Type |Default |
+|-----|--------|
+|Type |'https://www.npmjs.com/package/ep_mypads' or 'https://git.framasoft.org/framasoft/Etherpad/ep_mypads/wikis/use-ldap-authentication' |
 
 #### pad_title
 
