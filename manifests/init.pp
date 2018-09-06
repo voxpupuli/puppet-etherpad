@@ -49,9 +49,9 @@ class etherpad (
   String $default_pad_text          = 'Welcome to etherpad!',
 
   # Users
-  Optional[Hash] $users                  = undef,
-  Optional[String] $ep_local_admin_login = 'admin',
-  Optional[String] $ep_local_admin_pwd   = fqdn_rand_string(8),
+  Optional[Hash] $users           = undef,
+  String[1] $ep_local_admin_login = 'admin',
+  String[1] $ep_local_admin_pwd   = fqdn_rand_string(8),
 
   # Ssl
   Enum['enable','disable'] $ssl  = 'disable',
