@@ -4,6 +4,9 @@ describe 'etherpad' do
   context 'supported operating systems' do
     on_supported_os.each do |os, facts|
       context "on #{os}" do
+        let(:pre_condition) do
+          "package { 'nodejs' : ensure => present }"
+        end
         let(:facts) do
           facts
         end
@@ -239,6 +242,9 @@ describe 'etherpad' do
         end
 
         context 'etherpad class with users pad options set' do
+          let(:pre_condition) do
+            "package { 'nodejs' : ensure => present }"
+          end
           let(:params) do
             {
               'padoptions' => {
@@ -267,6 +273,9 @@ describe 'etherpad' do
         end
 
         context 'etherpad class with all parameters set and ssl enabled' do
+          let(:pre_condition) do
+            "package { 'nodejs' : ensure => present }"
+          end
           let(:params) do
             {
               ensure: 'present',
