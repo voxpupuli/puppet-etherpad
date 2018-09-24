@@ -217,6 +217,37 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
         end
 
+        context 'etherpad class without default ldapauth' do
+          let(:params) do
+            {
+              use_default_ldapauth: false,
+              plugins_list: {
+                'ep_ldapauth' => true
+              },
+              ldapauth: {
+                'url'                => 'ldap://ldap.foobar.com',
+                'accountBase'        => 'o=staff,o=foo,dc=bar,dc=com',
+                'groupAttributeIsDN' => false
+              },
+              users: {
+                'test_user' => {
+                  'password' => 's3cr3t',
+                  'is_admin' => true
+                }
+              }
+            }
+          end
+
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"ldapauth": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"accountBase": "o=staff,o=foo,dc=bar,dc=com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"groupAttributeIsDN": false$}) }
+          it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
+          it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{searchPWD}) }
+          it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{searchDN}) }
+        end
+
         context 'etherpad class with button_link set' do
           let(:params) do
             {
@@ -396,6 +427,7 @@ describe 'etherpad' do
                 'url'                => 'ldap://ldap.foobar.com',
                 'groupAttributeIsDN' => true
               },
+              use_default_ldapauth: false,
               require_session: false,
               edit_only: false,
               require_authentication: false,

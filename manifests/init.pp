@@ -45,6 +45,7 @@ class etherpad (
   Boolean $edit_only                = false,
   Boolean $require_authentication   = false,
   Boolean $require_authorization    = false,
+  Boolean $use_default_ldapauth     = true,
   Optional[String]  $pad_title      = undef,
   String $default_pad_text          = 'Welcome to etherpad!',
 
