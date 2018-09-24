@@ -60,6 +60,7 @@ class etherpad::install {
       environment => $environment,
       timeout     => 600, # installDeps takes a *long* time
       refreshonly => true,
+      require     => Package[nodejs],
     }
   }
 

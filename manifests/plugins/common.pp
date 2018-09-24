@@ -4,14 +4,11 @@ define etherpad::plugins::common (
   ) {
     include nodejs
     nodejs::npm { $valid_plugin_name :
-      ensure => 'present',
-      target => "${etherpad::root_dir}/",
-    }
-    ->file { $valid_plugin_name :
-      ensure => directory,
-      path   => "${etherpad::root_dir}/node_modules/${valid_plugin_name}",
-      owner  => $etherpad::user,
-      group  => $etherpad::group,
-      notify => Service[$etherpad::service_name],
+      ensure   => 'present',
+      target   => $etherpad::root_dir,
+      package  => $valid_plugin_name,
+      user     => $etherpad::user,
+      home_dir => $etherpad::root_dir,
+      notify   => Service[$etherpad::service_name],
     }
   }

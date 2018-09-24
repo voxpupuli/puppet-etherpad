@@ -4,6 +4,9 @@ describe 'etherpad' do
   context 'supported operating systems' do
     on_supported_os.each do |os, facts|
       context "on #{os}" do
+        let(:pre_condition) do
+          "package { 'nodejs' : ensure => present }"
+        end
         let(:facts) do
           facts
         end
@@ -54,8 +57,6 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"admin": {$|) }
-          it { is_expected.to contain_file('ep_ldapauth') }
-          it { is_expected.to contain_file('ep_button_link') }
           it { is_expected.not_to contain_file('/opt/etherpad/node_modules/ep_align') }
         end
       end
@@ -128,9 +129,6 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
           it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"searchFilter": "o=staff,o=foo,dc=bar,dc=com",$}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
-          it { is_expected.to contain_file('ep_ldapauth') }
-          it { is_expected.to contain_file('ldapauth-fork') }
-          it { is_expected.to contain_file('ep_mypads') }
         end
       end
     end
@@ -159,9 +157,6 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"test-admin": {$|) }
-          it { is_expected.to contain_file('ep_ldapauth') }
-          it { is_expected.to contain_file('ldapauth-fork') }
-          it { is_expected.to contain_file('ep_mypads') }
         end
       end
     end
@@ -192,9 +187,6 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"admin": {$|) }
-          it { is_expected.to contain_file('ep_ldapauth') }
-          it { is_expected.to contain_file('ldapauth-fork') }
-          it { is_expected.to contain_file('ep_mypads') }
         end
       end
     end
@@ -250,6 +242,9 @@ describe 'etherpad' do
         end
 
         context 'etherpad class with users pad options set' do
+          let(:pre_condition) do
+            "package { 'nodejs' : ensure => present }"
+          end
           let(:params) do
             {
               'padoptions' => {
@@ -278,6 +273,9 @@ describe 'etherpad' do
         end
 
         context 'etherpad class with all parameters set and ssl enabled' do
+          let(:pre_condition) do
+            "package { 'nodejs' : ensure => present }"
+          end
           let(:params) do
             {
               ensure: 'present',
