@@ -3,6 +3,7 @@ fixtures:
     stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
     vcsrepo: "https://github.com/puppetlabs/puppetlabs-vcsrepo.git"
     concat: "https://github.com/puppetlabs/puppetlabs-concat.git"
+    apt: "https://github.com/puppetlabs/puppetlabs-apt.git"
     nodejs: "https://github.com/voxpupuli/puppet-nodejs.git"
   symlinks:
     etherpad: "#{source_dir}"

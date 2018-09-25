@@ -35,6 +35,7 @@ etherpad modules on the Forge, but attempts to "*do it right™*".
 * It will setup a service using the system's preferred init
 * When running installDeps.sh, this module requires all the usual build tools,
   development packages and headers as any other (complex) npm install
+* When running on ubuntu OS, it will setup apt sources for nodejs with [puppetlabs-apt](https://forge.puppetlabs.com/puppetlabs/apt).
 
 ### Setup Requirements
 
@@ -42,6 +43,8 @@ This module requires a database. With no database available, it will use
 DirtyDB as fallback. This is not intended for production use.
 
 For a migration from DirtyDB, please consult [this blog post](https://codeborne.com/2011/10/19/etherpad-lite-migrate-data-from-dirtydb.html)
+
+On Ubuntu system, as soft dependency, you will need to ensure that puppetlabs-apt version 4.4.0 or above is installed.
 
 ### Beginning with etherpad
 
