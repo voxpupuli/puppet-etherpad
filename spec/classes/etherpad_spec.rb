@@ -151,12 +151,7 @@ describe 'etherpad' do
             }
           end
 
-          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r|^\s*"ep_mypads": {$|) }
-          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldaps:\/\/ldap.example.com",$}) }
-          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"searchBase\": \"ou=Groups,dc=example,dc=com\",$}) }
-          it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
-          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
-          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"test-admin": {$|) }
+          it { is_expected.to compile.and_raise_error(%r{You are using the default LDAP configuration}) }
         end
       end
     end
@@ -181,12 +176,7 @@ describe 'etherpad' do
             }
           end
 
-          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r|^\s*"ep_mypads": {$|) }
-          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldap:\/\/ldap.my-example.com",$}) }
-          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"searchBase\": \"ou=Groups,dc=example,dc=com\",$}) }
-          it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
-          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
-          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"admin": {$|) }
+          it { is_expected.to compile.and_raise_error(%r{You are using the default LDAP configuration}) }
         end
       end
     end
