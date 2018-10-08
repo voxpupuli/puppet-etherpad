@@ -5,5 +5,8 @@ fixtures:
     concat: "https://github.com/puppetlabs/puppetlabs-concat.git"
     apt: "https://github.com/puppetlabs/puppetlabs-apt.git"
     nodejs: "https://github.com/voxpupuli/puppet-nodejs.git"
+    yumrepo_core:
+      repo: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
+      puppet_version: ">= 6.0.0"
   symlinks:
     etherpad: "#{source_dir}"
