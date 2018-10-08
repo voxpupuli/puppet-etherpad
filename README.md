@@ -314,6 +314,14 @@ see below.
 |-----|--------|
 |Boolean|`false`|
 
+#### use_default_ldapauth
+
+Merge default ldapauth options to final config of ep_ldapauth plugin. If set to 'false' it can be used to omit default searchDN and searchPWD for anonymous ldap access.
+
+|Type |Default |
+|-----|--------|
+|Boolean|`true`|
+
 #### plugins_list
 
 Manage etherpad's plugins.
