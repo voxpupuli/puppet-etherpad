@@ -4,6 +4,39 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v2.2.0](https://github.com/voxpupuli/puppet-etherpad/tree/v2.2.0) (2018-10-08)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-etherpad/compare/v2.1.0...v2.2.0)
+
+**Implemented enhancements:**
+
+- add ubuntu 16.04 as supported OS [\#67](https://github.com/voxpupuli/puppet-etherpad/pull/67) ([Dan33l](https://github.com/Dan33l))
+- Add ep mypad into list of supported plugins [\#61](https://github.com/voxpupuli/puppet-etherpad/pull/61) ([your1p](https://github.com/your1p))
+- Add plugins auto installation  [\#55](https://github.com/voxpupuli/puppet-etherpad/pull/55) ([your1p](https://github.com/your1p))
+
+**Fixed bugs:**
+
+- Idempotent fix [\#63](https://github.com/voxpupuli/puppet-etherpad/pull/63) ([Dan33l](https://github.com/Dan33l))
+- Add dependencies for systemd service file [\#54](https://github.com/voxpupuli/puppet-etherpad/pull/54) ([sergiik](https://github.com/sergiik))
+
+**Closed issues:**
+
+- alert logs a message on the server [\#70](https://github.com/voxpupuli/puppet-etherpad/issues/70)
+- Needed to clean service\_provider [\#69](https://github.com/voxpupuli/puppet-etherpad/issues/69)
+- Add management for the plugins `ep\_mypads` [\#59](https://github.com/voxpupuli/puppet-etherpad/issues/59)
+- Add plugins auto-installation method  [\#51](https://github.com/voxpupuli/puppet-etherpad/issues/51)
+- Fix the travis matrix [\#36](https://github.com/voxpupuli/puppet-etherpad/issues/36)
+
+**Merged pull requests:**
+
+- remove unused old providers [\#72](https://github.com/voxpupuli/puppet-etherpad/pull/72) ([Dan33l](https://github.com/Dan33l))
+- change alert\(\) to fail\(\) [\#71](https://github.com/voxpupuli/puppet-etherpad/pull/71) ([Dan33l](https://github.com/Dan33l))
+- allow puppet 6.x [\#68](https://github.com/voxpupuli/puppet-etherpad/pull/68) ([Dan33l](https://github.com/Dan33l))
+- update nodejs version to 5.0.0 \(4.7.1 does not exist\) [\#65](https://github.com/voxpupuli/puppet-etherpad/pull/65) ([Dan33l](https://github.com/Dan33l))
+- update stdlib min version to 4.17.0 \(with service\_provider fact\) [\#64](https://github.com/voxpupuli/puppet-etherpad/pull/64) ([Dan33l](https://github.com/Dan33l))
+- Move files for 'debian' service\_provider to correct path [\#58](https://github.com/voxpupuli/puppet-etherpad/pull/58) ([sergiik](https://github.com/sergiik))
+- allow puppetlabs/stdlib 5.x [\#57](https://github.com/voxpupuli/puppet-etherpad/pull/57) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v2.1.0](https://github.com/voxpupuli/puppet-etherpad/tree/v2.1.0) (2018-08-06)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-etherpad/compare/v2.0.0...v2.1.0)
@@ -44,7 +77,6 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- release 2.0.0 [\#32](https://github.com/voxpupuli/puppet-etherpad/pull/32) ([bastelfreak](https://github.com/bastelfreak))
 - bump puppet version dependency to \>= 4.7.1 \< 6.0.0 [\#31](https://github.com/voxpupuli/puppet-etherpad/pull/31) ([bastelfreak](https://github.com/bastelfreak))
 - replace validate\_\* with datatypes [\#28](https://github.com/voxpupuli/puppet-etherpad/pull/28) ([bastelfreak](https://github.com/bastelfreak))
 - Add init.d script for 'debian' service\_provider [\#26](https://github.com/voxpupuli/puppet-etherpad/pull/26) ([sergiik](https://github.com/sergiik))
