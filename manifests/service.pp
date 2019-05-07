@@ -15,6 +15,7 @@ class etherpad::service {
 
   service { $::etherpad::service_name:
     ensure   => $::etherpad::service_ensure,
+    enable   => $::etherpad::service_enable,
     provider => $svc_provider,
   }
 

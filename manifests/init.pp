@@ -9,6 +9,7 @@ class etherpad (
   Etherpad::Ensure $ensure                   = 'present', # This should be a pattern, but right now that's too long
   String $service_name                       = 'etherpad',
   Enum['running', 'stopped'] $service_ensure = 'running', # again, should be an enum…
+  Boolean $service_enable                    = true,
   # what if the fact doesn't exist (yet) or is b0rked? use Optional.
   Optional[String] $service_provider         = $::service_provider,
   Boolean $manage_user                       = true,

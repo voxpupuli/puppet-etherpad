@@ -121,6 +121,15 @@ Ensure whether the service is running or stopped. If you're passing `absent` to
 |-----|--------|
 | Enum['running', 'stopped'] | `running` |
 
+#### service_enable
+
+Set whether the service is enabled or not. If you're passing `absent` to
+`ensure`, please also pass `false` to `service_enable`.
+
+|Type |Default |
+|-----|--------|
+|Boolean|`true`|
+
 #### service_provider
 
 Which [service provider](https://docs.puppetlabs.com/references/latest/type.html#service-providers)
