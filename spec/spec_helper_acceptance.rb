@@ -11,7 +11,7 @@ RSpec.configure do |c|
   # Configure all nodes in nodeset
   c.before :suite do
     # Additional modules for soft deps required by puppet-nodejs
-    install_module_from_forge('puppetlabs-apt', '>= 4.4.0 < 7.0.0') if fact('os.family') == 'Debian'
+    install_module_from_forge('puppetlabs-apt', '>= 4.4.0 < 8.0.0') if fact('os.family') == 'Debian'
 
     # needed :
     # * a database and granted user
