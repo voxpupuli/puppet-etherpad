@@ -18,7 +18,7 @@ RSpec.configure do |c|
     # * a php with mysql driver
     # * git command used by vcsrepo
 
-    install_module_from_forge('puppetlabs-mysql', '>= 6.0.0 < 7.0.0')
+    install_module_from_forge('puppetlabs-mysql', '>= 6.0.0 < 10.0.0')
 
     pp = %(
       include ::mysql::server
