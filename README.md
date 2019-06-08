@@ -352,7 +352,7 @@ List of all plugins is avalable at https://static.etherpad.org/plugins.html
 
 If the plugin is not supported, it will be installed but whitout configuration.
 
-Exemple :
+Examples :
 
 ```puppet
 class { 'etherpad':
@@ -378,7 +378,35 @@ class { 'etherpad':
   },
 }
 ```
+
 In this case `ep_button_link` will be installed with the configuration in `settings.json`, `ep_align` will be just installed and `ep_ldapauth` will be uninstalled.
+
+
+```puppet
+class { 'etherpad':
+  ensure               => 'present',
+  database_type        => 'mysql',
+  database_name        => 'etherpad',
+  database_user        => 'etherpad',
+  database_password    => '37h3rp4d',
+  plugins_list         => {
+    ep_button_link => true,
+    ep_align       => undef,
+    ep_mypads      => true,
+  },
+  mypads               => {
+    searchBase      =>  'cn=users,cn=accounts,dc=example,dc=com',
+    url             =>  'ldaps://ipa.example.com:636',
+    bindDN          =>  'uid=binduser,cn=sysaccounts,cn=etc,dc=example,dc=com',
+    bindCredentials =>  'bindpassword',
+    searchFilter    =>  '(memberOf=cn=etherpad_users,cn=groups,cn=accounts,dc=example,dc=com)'
+  },
+  ep_local_admin_login => 'my_ep_adminuser',
+  ep_local_admin_pwd   => 'my_ep_adminsecret',
+}
+```
+
+In this case `ep_button_link` and `ep_mypads` will be installed with some configurations in `settings.json`, `ep_align` will be just installed without configuration.
 
 #### button_link
 
