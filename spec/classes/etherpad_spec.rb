@@ -105,12 +105,11 @@ describe 'etherpad' do
           facts
         end
 
-        context 'etherpad class with ep_ldapauth and ep_mypads set' do
+        context 'etherpad class with ep_ldapauth set' do
           let(:params) do
             {
               plugins_list: {
-                'ep_ldapauth' => true,
-                'ep_mypads' => true
+                'ep_ldapauth' => true
               },
               ldapauth: {
                 'url'                => 'ldap://ldap.foobar.com',
@@ -125,58 +124,25 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"accountBase": "o=staff,o=foo,dc=bar,dc=com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"groupAttributeIsDN": false,$}) }
-          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r|^\s*"ep_mypads": {$|) }
-          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
-          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"searchFilter": "o=staff,o=foo,dc=bar,dc=com",$}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
         end
-      end
-    end
-  end
 
-  context 'supported operating systems' do
-    on_supported_os.each do |os, facts|
-      context "on #{os}" do
-        let(:facts) do
-          facts
-        end
-
-        context 'etherpad class with only ep_mypads set' do
-          let(:params) do
-            {
-              plugins_list: {
-                'ep_mypads' => true
-              },
-              ep_local_admin_login: 'test-admin'
-            }
-          end
-
-          it { is_expected.to compile.and_raise_error(%r{You are using the default LDAP configuration}) }
-        end
-      end
-    end
-  end
-
-  context 'supported operating systems' do
-    on_supported_os.each do |os, facts|
-      context "on #{os}" do
-        let(:facts) do
-          facts
-        end
-
-        context 'etherpad class with ep_mypads plugin and etherpad::mypads set' do
+        context 'etherpad class with ep_mypads set' do
           let(:params) do
             {
               plugins_list: {
                 'ep_mypads' => true
               },
               mypads: {
-                'url' => 'ldap://ldap.my-example.com'
+                'url'        => 'ldap://ldap.foobar.com',
+                'searchBase' => 'o=staff,o=foo,dc=bar,dc=com'
               }
             }
           end
 
-          it { is_expected.to compile.and_raise_error(%r{You are using the default LDAP configuration}) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r|^\s*"ep_mypads": {$|) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"searchBase": "o=staff,o=foo,dc=bar,dc=com"$}) }
         end
       end
     end
