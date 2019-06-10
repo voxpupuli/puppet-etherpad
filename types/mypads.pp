@@ -6,7 +6,7 @@ type Etherpad::Mypads = Struct[
     Optional['bindCredentials'] => String[1],
     Optional['searchBase']      => String,
     Optional['searchFilter']    => String,
-    Optional['tlsOptions']      => Boolean,
+    Optional['tlsOptions']      => Hash,
     Optional['properties']      => Hash[String, String],
     Optional['defaultLang']     => String,
   }
