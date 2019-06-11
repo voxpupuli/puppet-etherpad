@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v2.3.0](https://github.com/voxpupuli/puppet-etherpad/tree/v2.3.0) (2019-06-11)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-etherpad/compare/v2.2.0...v2.3.0)
+
+**Breaking changes:**
+
+- modulesync 2.7.0 and drop puppet 4 [\#77](https://github.com/voxpupuli/puppet-etherpad/pull/77) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- fix datatype for tlsOptions [\#81](https://github.com/voxpupuli/puppet-etherpad/pull/81) ([Dan33l](https://github.com/Dan33l))
+- ep\_mypads does not use ep\_ldapauth [\#80](https://github.com/voxpupuli/puppet-etherpad/pull/80) ([Dan33l](https://github.com/Dan33l))
+- Allow puppetlabs/concat 6.x, puppetlabs/stdlib 6.x, puppet/nodejs 7.x; require at least stdlib 4.25.0 instead of 4.17 [\#79](https://github.com/voxpupuli/puppet-etherpad/pull/79) ([dhoppe](https://github.com/dhoppe))
+
+**Merged pull requests:**
+
+- Add use\_default\_ldapauth option to allow skip merging of default settings [\#66](https://github.com/voxpupuli/puppet-etherpad/pull/66) ([sergiik](https://github.com/sergiik))
+
 ## [v2.2.0](https://github.com/voxpupuli/puppet-etherpad/tree/v2.2.0) (2018-10-08)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-etherpad/compare/v2.1.0...v2.2.0)
