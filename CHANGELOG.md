@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.0.0](https://github.com/voxpupuli/puppet-etherpad/tree/v3.0.0) (2019-06-11)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-etherpad/compare/v2.3.0...v3.0.0)
+
+Version 3.0.0 is a re-release of what was accidentally released as 2.3.0.  Version 2.3.0 contained a breaking change (puppet 4 is no longer supported).
+
 ## [v2.3.0](https://github.com/voxpupuli/puppet-etherpad/tree/v2.3.0) (2019-06-11)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-etherpad/compare/v2.2.0...v2.3.0)
