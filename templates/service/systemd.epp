@@ -6,6 +6,7 @@ Requires=network.target
 [Service]
 User=<%= $etherpad::user %>
 Group=<%= $etherpad::group %>
+Environment=NODE_ENV=production
 
 WorkingDirectory=<%= $etherpad::root_dir %>
 ExecStart=<%= $etherpad::root_dir -%>/bin/run.sh

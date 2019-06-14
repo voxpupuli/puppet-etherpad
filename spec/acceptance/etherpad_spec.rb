@@ -11,9 +11,9 @@ describe 'etherpad' do
           database_user     => 'epuserdb',
           database_password => 'secretdb',
           root_dir          => '/var/etherpad.foo.org',
-	  user              => 'ep',
-	  port              => 8000,
-	  pad_title         => 'the foo organisation',
+          user              => 'ep',
+          port              => 8000,
+          pad_title         => 'the foo organisation',
           users             => {
             admin => {
               password => 's3cr3t',
@@ -48,6 +48,10 @@ describe 'etherpad' do
 
     describe command('curl -L http://localhost:8000') do
       its(:stdout) { is_expected.to match %r{.*the foo organisation.*} }
+    end
+
+    describe command('systemctl status etherpad') do
+      its(:stdout) { is_expected.not_to match %r{.*Etherpad is running in Development mode.*} }
     end
   end
 end
