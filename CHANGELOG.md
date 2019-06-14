@@ -4,7 +4,19 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v3.0.0](https://github.com/voxpupuli/puppet-etherpad/tree/v3.0.0) (2019-06-11)
+## [v3.1.0](https://github.com/voxpupuli/puppet-etherpad/tree/v3.1.0) (2019-06-14)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-etherpad/compare/v3.0.0...v3.1.0)
+
+**Implemented enhancements:**
+
+- enable production mode [\#85](https://github.com/voxpupuli/puppet-etherpad/pull/85) ([Dan33l](https://github.com/Dan33l))
+
+**Closed issues:**
+
+- Logrotate issue when OS uses the upstart init system [\#22](https://github.com/voxpupuli/puppet-etherpad/issues/22)
+
+## [v3.0.0](https://github.com/voxpupuli/puppet-etherpad/tree/v3.0.0) (2019-06-12)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-etherpad/compare/v2.3.0...v3.0.0)
 
