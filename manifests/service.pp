@@ -5,22 +5,22 @@
 #
 class etherpad::service {
 
-  $svc_provider = $::etherpad::service_provider ? {
+  $svc_provider = $etherpad::service_provider ? {
     'nil'   => 'base', # software is pain.
     undef   => 'base',
-    default => $::etherpad::service_provider,
+    default => $etherpad::service_provider,
   }
 
   contain "::etherpad::service::${svc_provider}"
 
-  service { $::etherpad::service_name:
-    ensure   => $::etherpad::service_ensure,
+  service { $etherpad::service_name:
+    ensure   => $etherpad::service_ensure,
     provider => $svc_provider,
   }
 
-  unless $::etherpad::ensure == 'absent' {
+  unless $etherpad::ensure == 'absent' {
     Class["::etherpad::service::${svc_provider}"]
-    -> Service[$::etherpad::service_name]
+    -> Service[$etherpad::service_name]
   }
 
 }
