@@ -4,7 +4,16 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v3.1.0](https://github.com/voxpupuli/puppet-etherpad/tree/v3.1.0) (2019-06-14)
+## [v3.2.0](https://github.com/voxpupuli/puppet-etherpad/tree/v3.2.0) (2019-10-08)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-etherpad/compare/v3.1.0...v3.2.0)
+
+**Implemented enhancements:**
+
+- allow puppetlabs-vcsrepo 3.x [\#90](https://github.com/voxpupuli/puppet-etherpad/pull/90) ([Dan33l](https://github.com/Dan33l))
+- add Ubuntu1804 as compatible OS [\#89](https://github.com/voxpupuli/puppet-etherpad/pull/89) ([Dan33l](https://github.com/Dan33l))
+
+## [v3.1.0](https://github.com/voxpupuli/puppet-etherpad/tree/v3.1.0) (2019-06-18)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-etherpad/compare/v3.0.0...v3.1.0)
 
