@@ -4,12 +4,16 @@ require 'beaker/puppet_install_helper'
 require 'beaker/module_install_helper'
 
 run_puppet_install_helper unless ENV['BEAKER_provision'] == 'no'
-install_module
-install_module_dependencies
 
 RSpec.configure do |c|
+  # Readable test descriptions
+  c.formatter = :documentation
+
   # Configure all nodes in nodeset
   c.before :suite do
+    install_module
+    install_module_dependencies
+
     # Additional modules for soft deps required by puppet-nodejs
     install_module_from_forge('puppetlabs-apt', '>= 4.4.0 < 8.0.0') if fact('os.family') == 'Debian'
 
