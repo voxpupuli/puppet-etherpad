@@ -3,7 +3,6 @@
 # This class is called from etherpad for creating the user.
 #
 class etherpad::user {
-
   # ensure correct ordering in case of deinstallation
 
   if $etherpad::ensure == 'absent' {
@@ -29,5 +28,4 @@ class etherpad::user {
     system  => true,
     require => $user_require,
   }
-
 }

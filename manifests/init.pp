@@ -93,9 +93,9 @@ class etherpad (
     case $_penable {
       true: { contain "etherpad::plugins::${_pname}"
       }
-      undef: { etherpad::plugins::common { $_pname :}
+      undef: { etherpad::plugins::common { $_pname: }
       }
-      false: { etherpad::plugins::ucommon { $_pname :}
+      false: { etherpad::plugins::ucommon { $_pname: }
       }
       default: { fail("The plugin ${_pname} is not supported yet, please chek the plugin list.")
       }
