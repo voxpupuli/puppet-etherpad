@@ -4,7 +4,6 @@
 # It ensure the service is running.
 #
 class etherpad::service {
-
   $svc_provider = $etherpad::service_provider ? {
     'nil'   => 'base', # software is pain.
     undef   => 'base',
@@ -22,5 +21,4 @@ class etherpad::service {
     Class["::etherpad::service::${svc_provider}"]
     -> Service[$etherpad::service_name]
   }
-
 }

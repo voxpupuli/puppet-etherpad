@@ -3,7 +3,6 @@
 # This class is called from etherpad for install.
 #
 class etherpad::install {
-
   case $etherpad::ensure {
     'present', 'absent', 'latest': {
       $deps_ensure    = $etherpad::ensure
@@ -41,8 +40,7 @@ class etherpad::install {
       onlyif => "/usr/bin/test -e ${etherpad::root_dir}",
     }
   } else {
-
-    $environment = [ "HOME=${etherpad::root_dir}" ]
+    $environment = ["HOME=${etherpad::root_dir}"]
 
     vcsrepo { $etherpad::root_dir:
       ensure   => $vcs_ensure,
@@ -56,12 +54,11 @@ class etherpad::install {
       user        => $etherpad::user,
       group       => $etherpad::group,
       cwd         => $etherpad::root_dir,
-      path        => [ '/usr/bin', '/bin', '/usr/local/bin' ],
+      path        => ['/usr/bin', '/bin', '/usr/local/bin'],
       environment => $environment,
       timeout     => 600, # installDeps takes a *long* time
       refreshonly => true,
-      require     => Package[nodejs],
+      require     => Package['nodejs'],
     }
   }
-
 }

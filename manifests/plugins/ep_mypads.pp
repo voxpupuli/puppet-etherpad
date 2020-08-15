@@ -1,5 +1,4 @@
 class etherpad::plugins::ep_mypads {
-
   assert_private()
 
   $default_mypads_options = {
