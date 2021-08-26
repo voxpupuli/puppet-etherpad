@@ -11,7 +11,7 @@ configure_beaker do |host|
   # * a php with mysql driver
   # * git command used by vcsrepo
 
-  install_module_from_forge_on(host, 'puppetlabs-mysql', '>= 6.0.0 < 11.0.0')
+  install_module_from_forge_on(host, 'puppetlabs-mysql', '>= 6.0.0 < 13.0.0')
 
   pp = %(
     include mysql::server
