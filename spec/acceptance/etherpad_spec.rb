@@ -36,8 +36,11 @@ describe 'etherpad' do
       apply_manifest(pp, catch_changes: true)
     end
 
-    describe port(8000) do
-      it { is_expected.to be_listening }
+    describe port(8080) do
+      it {
+        sleep(10) # etherpad takes a while to start up
+        is_expected.to be_listening
+      }
     end
 
     describe process('node') do
