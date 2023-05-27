@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 require 'voxpupuli/acceptance/spec_helper_acceptance'
 
 configure_beaker do |host|
   # Additional modules for soft deps required by puppet-nodejs
-  if fact_on(host, 'os.family') == 'Debian'
-    install_module_from_forge_on(host, 'puppetlabs-apt', '>= 4.4.0 < 8.0.0')
-  end
+  install_module_from_forge_on(host, 'puppetlabs-apt', '>= 4.4.0 < 8.0.0') if fact_on(host, 'os.family') == 'Debian'
 
   # needed :
   # * a database and granted user

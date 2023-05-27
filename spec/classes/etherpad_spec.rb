@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'etherpad' do
@@ -18,7 +20,7 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').with_content(%r{check the documentation}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{ldapauth}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{ep_button_link}) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').without_content(%r{\"ssl" :}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').without_content(%r{"ssl" :}) }
           it { is_expected.to contain_service('etherpad') }
           it { is_expected.to contain_user('etherpad') }
           it { is_expected.to contain_group('etherpad') }
@@ -51,7 +53,7 @@ describe 'etherpad' do
           end
 
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"ldapauth": {$|) }
-          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap://ldap.foobar.com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"accountBase": "o=staff,o=foo,dc=bar,dc=com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"groupAttributeIsDN": false,$}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
@@ -87,12 +89,12 @@ describe 'etherpad' do
             }
           end
 
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{\"ssl\" :}) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{\"key\"  : \"/yourpath/etherpad.key\"}) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{\"cert\" : \"/yourpath/etherpad.crt\"}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{"ssl" :}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{"key"  : "/yourpath/etherpad.key"}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{"cert" : "/yourpath/etherpad.crt"}) }
           it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r/^\s*"ep_button_link": {$/) }
-          it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"text\": \"Link Button\",$}) }
-          it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"link\": \"https://example.com/pad-lister\",$}) }
+          it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"text": "Link Button",$}) }
+          it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"link": "https://example.com/pad-lister",$}) }
         end
       end
     end
@@ -121,7 +123,7 @@ describe 'etherpad' do
 
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"ldapauth": {$|) }
-          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap://ldap.foobar.com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"accountBase": "o=staff,o=foo,dc=bar,dc=com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"groupAttributeIsDN": false,$}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
@@ -141,7 +143,7 @@ describe 'etherpad' do
           end
 
           it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r|^\s*"ep_mypads": {$|) }
-          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldap://ldap.foobar.com",$}) }
           it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"searchBase": "o=staff,o=foo,dc=bar,dc=com"$}) }
         end
       end
@@ -177,7 +179,7 @@ describe 'etherpad' do
 
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"ldapauth": {$|) }
-          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap://ldap.foobar.com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"accountBase": "o=staff,o=foo,dc=bar,dc=com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"groupAttributeIsDN": false,$}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
@@ -206,7 +208,7 @@ describe 'etherpad' do
 
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"users": {$|) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"ldapauth": {$|) }
-          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap:\/\/ldap.foobar.com",$}) }
+          it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"url": "ldap://ldap.foobar.com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"accountBase": "o=staff,o=foo,dc=bar,dc=com",$}) }
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r{^\s*"groupAttributeIsDN": false$}) }
           it { is_expected.to contain_concat_fragment('settings-second.json.epp').without_content(%r{test_user}) }
@@ -224,8 +226,8 @@ describe 'etherpad' do
           end
 
           it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r/^\s*"ep_button_link": {$/) }
-          it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"text\": \"Hello world\",$}) }
-          it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"link\": \"http://example.com\",$}) }
+          it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"text": "Hello world",$}) }
+          it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"link": "http://example.com",$}) }
         end
 
         context 'etherpad class with users pad options set' do
@@ -241,17 +243,17 @@ describe 'etherpad' do
             }
           end
 
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{^\s*"padOptions\":}) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{^\s*"noColors\": true,}) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{^\s*"lang\": \"fr\"}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{^\s*"padOptions":}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{^\s*"noColors": true,}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{^\s*"lang": "fr"}) }
         end
 
         context 'etherpad class with bad users pad options set' do
           let(:params) do
             {
               'padoptions' => {
-                'nocolor'  => 'true',
-                'Lang'     => 'fr'
+                'nocolor' => 'true',
+                'Lang' => 'fr'
               }
             }
           end
@@ -339,9 +341,9 @@ describe 'etherpad' do
             }
           end
 
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{\"ssl\" :}) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{\"key\"  : \"/yourpath/etherpad.key\"}) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{\"cert\" : \"/yourpath/etherpad.crt\"}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{"ssl" :}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{"key"  : "/yourpath/etherpad.key"}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{"cert" : "/yourpath/etherpad.crt"}) }
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_file('/var/log/etherpad.log') }
         end
@@ -427,14 +429,14 @@ describe 'etherpad' do
             }
           end
 
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').without_content(%r{\"ssl\" :}) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').without_content(%r{\"key\"  : \"/yourpath/etherpad.key\"}) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').without_content(%r{\"cert\" : \"/yourpath/etherpad.crt\"}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').without_content(%r{"ssl" :}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').without_content(%r{"key"  : "/yourpath/etherpad.key"}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').without_content(%r{"cert" : "/yourpath/etherpad.crt"}) }
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_file('/var/log/etherpad.log') }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{\"padOptions\":}) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{\"noColors\": false,\n }) }
-          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{\"lang\": \"en-gb\"}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{"padOptions":}) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{"noColors": false,\n }) }
+          it { is_expected.to contain_concat_fragment('settings-first.json.epp').with_content(%r{"lang": "en-gb"}) }
         end
       end
     end
