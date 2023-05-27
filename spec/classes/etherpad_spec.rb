@@ -6,14 +6,15 @@ describe 'etherpad' do
   context 'supported operating systems' do
     on_supported_os.each do |os, facts|
       context "on #{os}" do
-        let(:pre_condition) do
-          "package { 'nodejs' : ensure => present }"
-        end
         let(:facts) do
           facts
         end
 
         context 'etherpad class without any parameters' do
+          let(:pre_condition) do
+            "package { 'nodejs' : ensure => present }"
+          end
+
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_vcsrepo('/opt/etherpad') }
           it { is_expected.to contain_file('/lib/systemd/system/etherpad.service') }
@@ -24,16 +25,6 @@ describe 'etherpad' do
           it { is_expected.to contain_service('etherpad') }
           it { is_expected.to contain_user('etherpad') }
           it { is_expected.to contain_group('etherpad') }
-        end
-      end
-    end
-  end
-
-  context 'supported operating systems' do
-    on_supported_os.each do |os, facts|
-      context "on #{os}" do
-        let(:facts) do
-          facts
         end
 
         context 'etherpad class with plugins_list enabled' do
@@ -61,16 +52,6 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('ep_ldapauth').with_content(%r|^\s*"admin": {$|) }
           it { is_expected.not_to contain_file('/opt/etherpad/node_modules/ep_align') }
         end
-      end
-    end
-  end
-
-  context 'supported operating systems' do
-    on_supported_os.each do |os, facts|
-      context "on #{os}" do
-        let(:facts) do
-          facts
-        end
 
         context 'etherpad class with button_link set and ssl enabled' do
           let(:params) do
@@ -95,16 +76,6 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r/^\s*"ep_button_link": {$/) }
           it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"text": "Link Button",$}) }
           it { is_expected.to contain_concat_fragment('ep_button_link').with_content(%r{^\s*"link": "https://example.com/pad-lister",$}) }
-        end
-      end
-    end
-  end
-
-  context 'supported operating systems' do
-    on_supported_os.each do |os, facts|
-      context "on #{os}" do
-        let(:facts) do
-          facts
         end
 
         context 'etherpad class with ep_ldapauth set' do
@@ -145,16 +116,6 @@ describe 'etherpad' do
           it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r|^\s*"ep_mypads": {$|) }
           it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"url": "ldap://ldap.foobar.com",$}) }
           it { is_expected.to contain_concat_fragment('ep_mypads').with_content(%r{^\s*"searchBase": "o=staff,o=foo,dc=bar,dc=com"$}) }
-        end
-      end
-    end
-  end
-
-  context 'supported operating systems' do
-    on_supported_os.each do |os, facts|
-      context "on #{os}" do
-        let(:facts) do
-          facts
         end
 
         context 'etherpad class with ldapauth set' do
